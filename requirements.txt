@@ -1,0 +1,10 @@
+--find-links https://download.pytorch.org/whl/cu121
+torch
+torchvision 
+lightning
+pandas
+numpy
+scikit-learn
+matplotlib
+timm
+optuna
