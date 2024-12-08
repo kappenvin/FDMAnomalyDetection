@@ -1,6 +1,6 @@
 --find-links https://download.pytorch.org/whl/cu121
-torch
-torchvision 
+##torch==2.1.2+cu121
+##torchvision==0.16.1+cu121
 lightning
 pandas
 numpy
@@ -8,3 +8,5 @@ scikit-learn
 matplotlib
 timm
 optuna
+mlflow
+ipykernel
