@@ -1,43 +1,28 @@
-Project
+## Configuration Files
 
-├── config
+- `data_config.yaml`: Configuration for data preprocessing and loading.
+- `model_config.yaml`: Configuration for the model architecture.
+- `training_config.yaml`: Configuration for training parameters.
 
-│ ├── data_config.yaml
+## Source Code
 
-│ ├── model_config.yaml
+- `src/data`: Contains data loading and transformation scripts.
+  - `dataset.py`: Dataset class for loading and processing data.
+  - `transforms.py`: Data transformation utilities.
+- `src/models`: Contains model definitions.
+  - `vit_model.py`: Vision Transformer model implementation.
+- `src/training`: Contains training-related scripts.
+  - `trainer.py`: Training loop and logic.
+  - `optimizer.py`: Optimizer configuration.
+- `src/utils`: Contains utility scripts.
+  - `logging_utils.py`: Logging utilities.
 
-│ └── training_config.yaml
+## Training
 
-├── src
+To train the model, run the following command:
 
-│ ├── data
+```bash
+cd src
 
-│ │ ├── **init**.py
-
-│ │ ├── dataset.py
-
-│ │ └── transforms.py
-
-│ ├── models
-
-│ │ ├── **init**.py
-
-│ │ └── vit_model.py
-
-│ ├── training
-
-│ │ ├── **init**.py
-
-│ │ ├── trainer.py
-
-│ │ └── optimizer.py
-
-│ ├── utils
-
-│ │ ├── **init**.py
-
-│ │ └── logging_utils.py
-
-│ └── **init**.py
-
-└── train.py
+python main.py
+```
