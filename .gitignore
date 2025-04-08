@@ -1,3 +1,9 @@
 venv/
-data/
+data/images/
 Src/__pycache__/
+mlartifacts/
+mlruns/
+src/database/psycopg2/
+sovol_venv/
+src/gcode_extraction/
+src/database/.env
