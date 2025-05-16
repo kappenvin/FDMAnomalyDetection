@@ -1,6 +1,7 @@
 **/__pycache__/
 venv/
 data/images/
+data/gcode/
 src/__pycache__/
 mlartifacts/
 mlruns/
@@ -8,4 +9,9 @@ src/database/psycopg2/
 sovol_venv/
 src/database/gcode_extraction/
 src/database/.env
+src/data_handling/
+roo/
 
+
+# windsurf rules
+.windsurfrules
