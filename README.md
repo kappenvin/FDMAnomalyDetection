@@ -19,7 +19,7 @@
 
 ## Training
 
-To train the model, run the following command:
+To train the model, run the following commands :
 
 ```bash
 cd src

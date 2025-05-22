@@ -1,0 +1,25 @@
+model:
+  name: "base"
+  pretrained: true
+  num_labels: 5
+  patch_size: 16
+  weight_decay: 0
+  optimizer: "Adam"
+
+training:
+  min_epochs: 1
+  max_epochs: 20
+  fast_dev_run: false
+  accelerator: "gpu"
+  batch_size: 64
+  num_workers: 0
+  batch_size: 64
+  
+  
+
+optuna:
+  n_trials: 4
+  search_space:
+    learning_rate: [1.0e-5, 1.0e-4, 1.0e-3, 1.0e-2]
+  weight_decay: 0
+  

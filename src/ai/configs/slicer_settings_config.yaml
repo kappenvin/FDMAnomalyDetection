@@ -1,0 +1,48 @@
+slicer_settings:
+  first_layer_temperature:
+    type: "INTEGER"
+    description: "Temperature of the first layer in Celsius"
+    
+  sparse_infill_density:
+    type: "INTEGER"
+    description: "Infill density percentage"
+    
+  first_layer_bed_temperature:
+    type: "INTEGER"
+    description: "Bed temperature for the first layer in Celsius"
+    
+  nozzle_temperature_initial_layer:
+    type: "INTEGER"
+    description: "Nozzle temperature for the initial layer in Celsius"
+    
+  nozzle_temperature:
+    type: "INTEGER"
+    description: "General nozzle temperature in Celsius"
+    
+  travel_speed:
+    type: "INTEGER"
+    description: "Speed of non-printing travel moves in mm/s"
+    
+  sparse_infill_speed:
+    type: "INTEGER"
+    description: "Speed for printing infill in mm/s"
+    
+  retraction_speed:
+    type: "INTEGER"
+    description: "Speed of filament retraction in mm/s"
+    
+  retraction_length:
+    type: "DOUBLE PRECISION"
+    description: "Length of filament retraction in mm"
+    
+  first_layer_height:
+    type: "DOUBLE PRECISION"
+    description: "Height of the first layer in mm"
+    
+  layer_height:
+    type: "DOUBLE PRECISION"
+    description: "Height of layers after first layer in mm"
+    
+  line_width:
+    type: "INTEGER"
+    description: "Width of printed lines in percentage"

@@ -10,3 +10,5 @@ timm
 optuna
 mlflow
 ipykernel
+dvc
+boto3
