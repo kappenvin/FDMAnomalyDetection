@@ -14,10 +14,12 @@ class ImageData(Base):
     timestamp: Mapped[datetime] = mapped_column(
         sa.DateTime(), nullable=False, server_default=func.now()
     )
-    slicer_settings_id: Mapped[int] = mapped_column(sa.ForeignKey("slicer_settings.id"))
-    parts_id: Mapped[int] = mapped_column(sa.ForeignKey("parts.id"))
-    label: Mapped[int]
-    layer: Mapped[int]
+    slicer_settings_id: Mapped[int] = mapped_column(
+        sa.ForeignKey("slicer_settings.id"), nullable=True
+    )
+    parts_id: Mapped[int] = mapped_column(sa.ForeignKey("parts.id"), nullable=True)
+    label: Mapped[int] = mapped_column(nullable=True)
+    layer: Mapped[int] = mapped_column(nullable=True)
 
     # Add relationships to Slicer_settings and Parts
     slicer_settings: Mapped[SlicerSettings] = relationship(back_populates="images")
