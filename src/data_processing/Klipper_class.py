@@ -1,11 +1,12 @@
 from requests import get, post
+from utils.extract_gcode_from_string import extract_relevant_slicing_parameters_from_string
 
 
 class KlipperPrinter(object):
     """Moonraker API interface.
     Args
     ----
-    address (str): e.g. 'http://192.168.1.17'
+    address (str): e.g. 'http://192.168.1.17/'
     """
 
     def __init__(self, address: str) -> None:
@@ -36,8 +37,29 @@ class KlipperPrinter(object):
             return True
         return False
 
+    def get_filename(self) -> str:
+        printer_gcode_filename = self.get("/printer/objects/query?print_stats")[
+            "result"
+        ]["status"]["print_stats"]["filename"]
+
+        return printer_gcode_filename
+
     def get_gcode(self):
-        pass
+
+        printer_gcode_filename = self.get_filename()
+        gcode_download_url = f"/server/files/gcodes/{printer_gcode_filename}"
+        gcode_response = self.get_download(gcode_download_url)
+        gcode_content = gcode_response.text
+        return gcode_content
+
+    def extract_gcode_params(self) -> dict:
+        gcode_content = self.get_gcode()
+        # Extract relevant parameters from the G-code content
+        params = extract_relevant_slicing_parameters_from_string(gcode_content)
+        return params
+    def get_part_name(self) -> str:
+
+        return self.get_filename().split("_0")[0]
 
     def query_status(self):
         """
@@ -51,6 +73,17 @@ class KlipperPrinter(object):
         query = "/printer/objects/query?print_stats"
         return self.get(query)["result"]["status"]["print_stats"]["state"]
 
+    def get_current_layer(self) -> int:
+        """
+        Get the current layer number of the print job.
+
+        Returns
+        -------
+        int
+            The current layer number.
+        """
+        return self.get("/printer/objects/query?print_stats")["result"]["status"]["print_stats"]["info"]["current_layer"]
+        
     def set_bed_temp(self, target: float = 0.0):
         pass
 
@@ -66,3 +99,7 @@ class KlipperPrinter(object):
         """`response.set` wrapper. `url` is concatenated to printer base address.
         Returns .json response dict."""
         return post(self.addr + url, *args, **kwargs).json()
+
+    def get_download(self, url: str):
+        """Download the content from a G-code file from the printer's server. without cenversion to json"""
+        return get(self.addr + url, timeout=2)

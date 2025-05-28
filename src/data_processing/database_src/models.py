@@ -16,7 +16,7 @@ class ImageData(Base):
     )
     slicer_settings_id: Mapped[int] = mapped_column(sa.ForeignKey("slicer_settings.id"))
     parts_id: Mapped[int] = mapped_column(sa.ForeignKey("parts.id"))
-    label: Mapped[int]
+    label: Mapped[int] = mapped_column(nullable=True)  
     layer: Mapped[int]
 
     # Add relationships to Slicer_settings and Parts
