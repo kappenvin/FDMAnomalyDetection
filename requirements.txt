@@ -12,3 +12,7 @@ mlflow
 ipykernel
 dvc
 boto3
+pytest
+pytest-cov
+pytest-mock
+requests
