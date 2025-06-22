@@ -37,7 +37,6 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 
 | Results Table | Confusion Matrix |
 |--------------|------------------|
-| 
 | Class          | Accuracy |
 | -------------- | -------- |
 | Normal         | 0.98     |
