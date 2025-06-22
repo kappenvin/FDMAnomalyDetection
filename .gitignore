@@ -2,6 +2,8 @@
 venv/
 data/images/
 data/gcode/
+data/csv/
+.dvc/
 src/__pycache__/
 mlartifacts/
 mlruns/
@@ -16,6 +18,9 @@ docs/
 STL_Files/
 .github/
 pytorchr_installation.txt
+ src/SQL_files/
+ src/data_processing/database_src/playground/
+.TASK.md
 
 # windsurf rules
 .windsurfrules
