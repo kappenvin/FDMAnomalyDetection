@@ -46,11 +46,7 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 | Spaghetti      | 0.68     |
 | Stringing      | 0.54     |
 
-  </div>
-  <div>
-    <img src="pictures/results/confusion_matrix_normalized_Resnet50_gray_black.png" alt="ResNet50 Confusion Matrix" width="400" height="300">
-  </div>
-</div>
+ | ![ResNet50 Confusion Matrix](pictures/results/confusion_matrix_normalized_Resnet50_gray_black.png) |
 
 ### Vit-B/16 Model Performance
 
