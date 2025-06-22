@@ -79,38 +79,64 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 
 The system uses a PostgreSQL database to store image data, slicer settings, and part information. The database consists of three main tables with foreign key relationships.
 
-### Entity Relationship Diagram
+### Tables Overview
+
+| Table              | Purpose                                   | Primary Key |
+| ------------------ | ----------------------------------------- | ----------- |
+| **ImageData**      | Stores captured images and metadata       | `id`        |
+| **SlicerSettings** | Stores 3D printing parameters             | `id`        |
+| **Parts**          | Stores information about 3D printed parts | `id`        |
+
+### Table Relationships
 
 ```
-┌─────────────────┐       ┌──────────────────┐       ┌─────────────────┐
-│   Parts         │       │   ImageData      │       │ SlicerSettings  │
-├─────────────────┤       ├──────────────────┤       ├─────────────────┤
-│ id (PK)         │◄──────┤ parts_id (FK)    │──────►│ id (PK)         │
-│ name            │       │ slicer_settings_ │       │ slicer_profile  │
-│ url             │       │ id (FK)          │       │ sparse_infill_  │
-│ general_image   │       │ id (PK)          │       │ density         │
-└─────────────────┘       │ image (BLOB)     │       │ sparse_infill_  │
-                          │ timestamp        │       │ pattern         │
-                          │ label            │       │ sparse_infill_  │
-                          │ layer            │       │ speed           │
-                          └──────────────────┘       │ first_layer_bed_│
-                                                     │ temperature     │
-                                                     │ bed_temperature_│
-                                                     │ other_layers    │
-                                                     │ first_layer_    │
-                                                     │ nozzle_temp     │
-                                                     │ nozzle_temp_    │
-                                                     │ other_layers    │
-                                                     │ travel_speed    │
-                                                     │ first_layer_    │
-                                                     │ height          │
-                                                     │ layer_height_   │
-                                                     │ other_layers    │
-                                                     │ line_width      │
-                                                     │ retraction_     │
-                                                     │ length          │
-                                                     │ filament_flow_  │
-                                                     │ ratio           │
-                                                     │ printer_name    │
-                                                     └─────────────────┘
+Parts  <────  ImageData (N) ────>  SlicerSettings
 ```
+
+- One **Part** can have many **Images**
+- One **SlicerSettings** profile can be used for many **Images**
+- Each **Image** belongs to one **Part** and uses one **SlicerSettings** profile
+
+### Table Schemas
+
+#### ImageData
+
+| Column               | Type         | Description                                                        |
+| -------------------- | ------------ | ------------------------------------------------------------------ |
+| `id`                 | INTEGER (PK) | Auto-increment primary key                                         |
+| `image`              | BLOB         | Binary image data                                                  |
+| `timestamp`          | DATETIME     | When image was captured                                            |
+| `label`              | INTEGER      | Anomaly type (0=Normal, 1=Stringing, 2=Under, 3=Over, 4=Spaghetti) |
+| `layer`              | INTEGER      | Print layer number                                                 |
+| `parts_id`           | INTEGER (FK) | Foreign key to Parts table                                         |
+| `slicer_settings_id` | INTEGER (FK) | Foreign key to SlicerSettings table                                |
+
+#### SlicerSettings
+
+| Column                            | Type         | Description                        |
+| --------------------------------- | ------------ | ---------------------------------- |
+| `id`                              | INTEGER (PK) | Auto-increment primary key         |
+| `slicer_profile`                  | VARCHAR      | Profile name/identifier            |
+| `sparse_infill_density`           | INTEGER      | Infill percentage (0-100)          |
+| `sparse_infill_pattern`           | VARCHAR      | Infill pattern type                |
+| `sparse_infill_speed`             | INTEGER      | Infill print speed (mm/s)          |
+| `first_layer_bed_temperature`     | INTEGER      | First layer bed temp (°C)          |
+| `bed_temperature_other_layers`    | INTEGER      | Other layers bed temp (°C)         |
+| `first_layer_nozzle_temperature`  | INTEGER      | First layer nozzle temp (°C)       |
+| `nozzle_temperature_other_layers` | INTEGER      | Other layers nozzle temp (°C)      |
+| `travel_speed`                    | INTEGER      | Non-printing movement speed (mm/s) |
+| `first_layer_height`              | FLOAT        | First layer height (mm)            |
+| `layer_height_other_layers`       | FLOAT        | Standard layer height (mm)         |
+| `line_width`                      | FLOAT        | Extrusion line width (mm)          |
+| `retraction_length`               | FLOAT        | Filament retraction distance (mm)  |
+| `filament_flow_ratio`             | FLOAT        | Flow rate multiplier               |
+| `printer_name`                    | VARCHAR      | 3D printer identifier              |
+
+#### Parts
+
+| Column          | Type         | Description                |
+| --------------- | ------------ | -------------------------- |
+| `id`            | INTEGER (PK) | Auto-increment primary key |
+| `name`          | VARCHAR      | Part name/identifier       |
+| `url`           | VARCHAR      | Reference URL or file path |
+| `general_image` | BLOB         | Representative part image  |
