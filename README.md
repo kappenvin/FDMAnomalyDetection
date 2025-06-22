@@ -5,7 +5,7 @@ This project focuses on developing an automated system for identifying anomalies
 **Key aspects:**
 
 - **FDM Anomaly Detection**: Real-time identification of print defects.
-- **Nozzle-Mounted Camera**: Utilized for precise image acquisition.
+- **Nozzle-Mounted Camera**: Utilized for close lookup and early failure detection.
 - **Four Distinct Error Types**: Capability to classify between stringing, underextrusion, overextrusion and spaghetti failure.
 - **Extensive Dataset**: Trained, validated and tested on 85,000 images.
 
