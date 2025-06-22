@@ -35,9 +35,9 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 
 ### Resnet50 Model Performance
 
-<div style="display: flex; align-items: flex-start; gap: 20px;">
-  <div>
-
+| Results Table | Confusion Matrix |
+|--------------|------------------|
+| 
 | Class          | Accuracy |
 | -------------- | -------- |
 | Normal         | 0.98     |
@@ -46,7 +46,7 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 | Spaghetti      | 0.68     |
 | Stringing      | 0.54     |
 
- | ![ResNet50 Confusion Matrix](pictures/results/confusion_matrix_normalized_Resnet50_gray_black.png) |
+| ![ResNet50 Confusion Matrix](pictures/results/confusion_matrix_normalized_Resnet50_gray_black.png) |
 
 ### Vit-B/16 Model Performance
 
