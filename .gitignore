@@ -18,8 +18,8 @@ docs/
 STL_Files/
 .github/
 pytorchr_installation.txt
- src/SQL_files/
- src/data_processing/database_src/playground/
+.src/SQL_files/
+.src/data_processing/database_src/playground/
 .TASK.md
 
 # windsurf rules
