@@ -35,22 +35,30 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 
 ### Resnet50 Model Performance
 
-| Results Table  | Confusion Matrix |
-| -------------- | ---------------- |
-| Class          | Accuracy         |
-| -------------- | --------         |
-| Normal         | 0.98             |
-| Unterextrusion | 0.55             |
-| Überextrusion  | 0.62             |
-| Spaghetti      | 0.68             |
-| Stringing      | 0.54             |
+<table>
+<tr>
+<td>
 
-| ![ResNet50 Confusion Matrix](pictures/results/confusion_matrix_normalized_Resnet50_gray_black.png) |
+| Class          | Accuracy |
+| -------------- | -------- |
+| Normal         | 0.98     |
+| Unterextrusion | 0.55     |
+| Überextrusion  | 0.62     |
+| Spaghetti      | 0.68     |
+| Stringing      | 0.54     |
+
+</td>
+<td>
+<img src="pictures/results/confusion_matrix_normalized_Resnet50_gray_black.png" alt="ResNet50 Confusion Matrix" width="300" height="200">
+</td>
+</tr>
+</table>
 
 ### Vit-B/16 Model Performance
 
-<div style="display: flex; align-items: flex-start; gap: 20px;">
-  <div>
+<table>
+<tr>
+<td>
 
 | Class          | Accuracy |
 | -------------- | -------- |
@@ -60,8 +68,9 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 | Spaghetti      | 0.80     |
 | Stringing      | 0.65     |
 
-  </div>
-  <div>
-    <img src="pictures/results/confusion_matrix_normalized_Vit_base_16_Adam_lr_6e-6_black_gray.png" alt="ViT Confusion Matrix" width="300" height="200">
-  </div>
-</div>
+</td>
+<td>
+<img src="pictures/results/confusion_matrix_normalized_Vit_base_16_Adam_lr_6e-6_black_gray.png" alt="ViT Confusion Matrix" width="300" height="200">
+</td>
+</tr>
+</table>
