@@ -1,5 +1,6 @@
 **/__pycache__/
 venv/
+data/
 data/images/
 data/gcode/
 data/csv_files/
@@ -18,9 +19,11 @@ docs/
 STL_Files/
 .github/
 pytorchr_installation.txt
-.src/SQL_files/
-.src/data_processing/database_src/playground/
-.TASK.md
+src/SQL_files/
+src/data_processing/database_src/playground/
+TASK.md
+PLANNING.md
+models/
 
 # windsurf rules
 .windsurfrules

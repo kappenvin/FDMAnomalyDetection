@@ -8,35 +8,43 @@ from gcode_extraction.extract_gcode_from_string import (
 
 from database_src.models import SlicerSettings
 from database_src.database import Session
+import sys
 
 url = "http://192.168.2.170/"
 printer = KlipperPrinter(url)
 # start Session
 session = Session()
-"""
-printer_gcode = printer.get("/printer/objects/query?print_stats")["result"]["status"][
-    "print_stats"
-]["filename"]
-"""
+
+printer_gcode_filename = printer.get("/printer/objects/query?print_stats")["result"][
+    "status"
+]["print_stats"]["filename"]
+print(f"Current G-code file: {printer_gcode_filename}")
+
 
 printer_gcode = (
     "schnappverbindung_kiste v9_0.2mm_PLA_Generic Klipper Printer_20m24_test.gcode"
 )
 
-gcode_download_url = f"{url}server/files/gcodes/{printer_gcode}"
+gcode_download_url = f"/server/files/gcodes/{printer_gcode}"
 
-
-gcode_response = requests.get(gcode_download_url)
+gcode_response = printer.get_download(gcode_download_url)
+print(gcode_response)
 gcode_content = gcode_response.text
 
 # extract the gcode parameters
 params = extract_relevant_slicing_parameters_from_string(
     gcode_content,
 )
+print(params)
+
+for key, value in params.items():
+    print(f"{key}: {value} (type: {type(value)})")
+
+sys.exit(0)  # Exit after extracting parameters for debugging
 
 # Prepare data for SlicerSettings, ensuring correct types
 try:
-    slicer_profile_val = "to_delete"  # Or derive from params if available
+    slicer_profile_val = "to_delete_2"  # Or derive from params if available
     sparse_infill_density_val = int(params["sparse_infill_density"][:-1])
     sparse_infill_pattern_val = params["sparse_infill_pattern"]
     sparse_infill_speed_val = int(params["sparse_infill_speed"])
@@ -120,4 +128,4 @@ else:
 session.close()
 
 print(f"Extracted parameters: {params}")
-# print(f"Using SlicerSetting ID: {slicer_setting_id}")
+print(f"Using SlicerSetting ID: {slicer_setting_id}")

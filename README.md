@@ -1,8 +1,13 @@
-## Configuration Files
+## Description
 
-- `data_config.yaml`: Configuration for data preprocessing and loading.
-- `model_config.yaml`: Configuration for the model architecture.
-- `training_config.yaml`: Configuration for training parameters.
+This project focuses on developing an automated system for identifying anomalies in Fused Deposition Modeling (FDM) 3D prints.
+
+Key aspects include:
+
+FDM Anomaly Detection: Real-time identification of print defects.
+Nozzle-Mounted Camera: Utilized for precise image acquisition.
+Four Distinct Error Types: Capability to classify between stringing, underextrusion, overextrusion and spaghetti failure.
+Extensive Dataset: Trained on 85,000 images for high accuracy.
 
 ## Source Code
 

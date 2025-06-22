@@ -12,3 +12,13 @@ mlflow
 ipykernel
 dvc
 boto3
+# FastAPI dependencies
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+sqlalchemy
+psycopg2-binary
+python-dotenv
+onnxruntime
+pillow

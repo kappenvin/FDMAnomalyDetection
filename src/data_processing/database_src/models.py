@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 from datetime import datetime
-from .database import Base, engine
+from .database import Base
 
 
 class ImageData(Base):
@@ -69,5 +69,7 @@ class Parts(Base):
 
 
 if __name__ == "__main__":
+    from .database import engine
+
     Base.metadata.create_all(bind=engine)
     print("Tables 'image_data', 'slicer_settings', and 'parts' created successfully!")

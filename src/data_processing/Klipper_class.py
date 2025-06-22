@@ -1,4 +1,7 @@
 from requests import get, post
+from gcode_extraction.extract_gcode_from_string import (
+    extract_relevant_slicing_parameters_from_string,
+)
 
 
 class KlipperPrinter(object):
@@ -16,12 +19,6 @@ class KlipperPrinter(object):
         self.settings = configfile["result"]["status"]["configfile"]["settings"]
         self.config = configfile["result"]["status"]["configfile"]["config"]
 
-        """
-        self.cmd_qgl = "QUAD_GANTRY_LEVEL"
-        self.cmd_bed_mesh = "BED_MESH_CALIBRATE"
-        self.temp_sensors = self.list_temp_sensors()
-        """
-
     def check_connection(self) -> bool:
         try:
             self.get("/printer/objects/query?configfile")
@@ -36,8 +33,30 @@ class KlipperPrinter(object):
             return True
         return False
 
+    def get_filename(self) -> str:
+        printer_gcode_filename = self.get("/printer/objects/query?print_stats")[
+            "result"
+        ]["status"]["print_stats"]["filename"]
+
+        return printer_gcode_filename
+
     def get_gcode(self):
-        pass
+
+        printer_gcode_filename = self.get_filename()
+        gcode_download_url = f"/server/files/gcodes/{printer_gcode_filename}"
+        gcode_response = self.get_download(gcode_download_url)
+        gcode_content = gcode_response.text
+        return gcode_content
+
+    def extract_gcode_params(self) -> dict:
+        gcode_content = self.get_gcode()
+        # Extract relevant parameters from the G-code content
+        params = extract_relevant_slicing_parameters_from_string(gcode_content)
+        return params
+
+    def get_part_name(self) -> str:
+
+        return self.get_filename().split("_0")[0]
 
     def query_status(self):
         """
@@ -51,12 +70,6 @@ class KlipperPrinter(object):
         query = "/printer/objects/query?print_stats"
         return self.get(query)["result"]["status"]["print_stats"]["state"]
 
-    def set_bed_temp(self, target: float = 0.0):
-        pass
-
-    def set_extruder_temp(self, target: float = 0.0):
-        pass
-
     def get(self, url: str):
         """`response.get` wrapper. `url` concatenated to printer base address
         Returns .json response dict."""
@@ -66,3 +79,7 @@ class KlipperPrinter(object):
         """`response.set` wrapper. `url` is concatenated to printer base address.
         Returns .json response dict."""
         return post(self.addr + url, *args, **kwargs).json()
+
+    def get_download(self, url: str):
+        """Download the content from a G-code file from the printer's server."""
+        return get(self.addr + url, timeout=2)
