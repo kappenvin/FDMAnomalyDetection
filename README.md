@@ -74,3 +74,43 @@ The project evaluates the performance of two models: ResNet50 and ViT-B/16, both
 </td>
 </tr>
 </table>
+
+## Database Structure
+
+The system uses a PostgreSQL database to store image data, slicer settings, and part information. The database consists of three main tables with foreign key relationships.
+
+### Entity Relationship Diagram
+
+```
+┌─────────────────┐       ┌──────────────────┐       ┌─────────────────┐
+│   Parts         │       │   ImageData      │       │ SlicerSettings  │
+├─────────────────┤       ├──────────────────┤       ├─────────────────┤
+│ id (PK)         │◄──────┤ parts_id (FK)    │──────►│ id (PK)         │
+│ name            │       │ slicer_settings_ │       │ slicer_profile  │
+│ url             │       │ id (FK)          │       │ sparse_infill_  │
+│ general_image   │       │ id (PK)          │       │ density         │
+└─────────────────┘       │ image (BLOB)     │       │ sparse_infill_  │
+                          │ timestamp        │       │ pattern         │
+                          │ label            │       │ sparse_infill_  │
+                          │ layer            │       │ speed           │
+                          └──────────────────┘       │ first_layer_bed_│
+                                                     │ temperature     │
+                                                     │ bed_temperature_│
+                                                     │ other_layers    │
+                                                     │ first_layer_    │
+                                                     │ nozzle_temp     │
+                                                     │ nozzle_temp_    │
+                                                     │ other_layers    │
+                                                     │ travel_speed    │
+                                                     │ first_layer_    │
+                                                     │ height          │
+                                                     │ layer_height_   │
+                                                     │ other_layers    │
+                                                     │ line_width      │
+                                                     │ retraction_     │
+                                                     │ length          │
+                                                     │ filament_flow_  │
+                                                     │ ratio           │
+                                                     │ printer_name    │
+                                                     └─────────────────┘
+```
