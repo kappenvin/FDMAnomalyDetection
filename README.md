@@ -90,7 +90,7 @@ The system uses a PostgreSQL database to store image data, slicer settings, and 
 ### Table Relationships
 
 ```
-Parts  <────  ImageData (N) ────>  SlicerSettings
+Parts  <────  ImageData  ────>  SlicerSettings
 ```
 
 - One **Part** can have many **Images**
