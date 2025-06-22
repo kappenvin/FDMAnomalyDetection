@@ -2,7 +2,7 @@
 venv/
 data/images/
 data/gcode/
-data/csv/
+data/csv_files/
 .dvc/
 src/__pycache__/
 mlartifacts/
