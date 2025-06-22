@@ -107,7 +107,7 @@ Parts  <────  ImageData (N) ────>  SlicerSettings
 | `image`              | BLOB         | Binary image data                                                  |
 | `timestamp`          | DATETIME     | When image was captured                                            |
 | `label`              | INTEGER      | Anomaly type (0=Normal, 1=Stringing, 2=Under, 3=Over, 4=Spaghetti) |
-| `layer`              | INTEGER      | Print layer number                                                 |
+| `layer`              | INTEGER      | layer number                                                       |
 | `parts_id`           | INTEGER (FK) | Foreign key to Parts table                                         |
 | `slicer_settings_id` | INTEGER (FK) | Foreign key to SlicerSettings table                                |
 
